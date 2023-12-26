@@ -52,9 +52,11 @@ export default function Notification() {
   const [open, setOpen] = React.useState(true);
   const [notif, setNotif] = useState<string>("");
 
-  const handleNotif = async () => {
-    dispatch(addNotif({ notifications: notif }));
-    setNotif("");
+  const handleNotif = async (e) => {
+    e.preventDefault();
+    const newItem = { notifications: notif };
+    dispatch(addNotif(newItem));
+    // setNotif("");
   };
   const drawerWidth: number = 240;
 
