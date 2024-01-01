@@ -64,18 +64,19 @@ export const addUser = createAsyncThunk("news/addUser", async (newItem) => {
     throw new Error("Failed to add");
   }
 });
+console.log("salam");
 /////
 export const addNotif = createAsyncThunk("news/addNotif", async (newItem) => {
   try {
     const response = await axios.get(
       `https://usersapi-2rke.onrender.com/users/`
     );
-    for (const user of response.data) {
+    const updatePromises = response.data.map(async (user: any) => {
       await axios.patch(`https://usersapi-2rke.onrender.com/users/${user.id}`, {
         notifications: [...user.notifications, newItem],
       });
-    }
-    console.log("newItem:", newItem);
+    });
+    await Promise.all(updatePromises);
     return response.data;
   } catch (error) {
     throw new Error("Failed");

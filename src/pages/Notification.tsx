@@ -43,8 +43,6 @@ export default function Notification() {
   );
 
   const dispatch = useDispatch();
-  const [searchh, setSearchh] = useState<string>("");
-  const [showResults, setShowResults] = useState<boolean>(false);
   useEffect(() => {
     dispatch(fetchUsers());
   }, [dispatch]);
@@ -56,7 +54,7 @@ export default function Notification() {
     e.preventDefault();
     const newItem = { notifications: notif };
     dispatch(addNotif(newItem));
-    // setNotif("");
+    setNotif("");
   };
   const drawerWidth: number = 240;
 
